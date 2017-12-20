@@ -35,7 +35,7 @@ class TrainTransport(BaseTransport):
     def cost(self, time_price, type_users, road_users):
         return (self.ticket_cost +
                 time_price * self._travel_time(type_users, road_users) +
-                self.irritability(type_users, road_users))
+                self._irritability(type_users, road_users))
 
     def get_road_type(self):
         return ROAD_TYPES['train']
@@ -43,7 +43,7 @@ class TrainTransport(BaseTransport):
 
 class TaxiTransport(BaseTransport):
 
-    def __init__(self, base_price, price_coeff, spec_road_percentage, free_way_time, load_road_coeff):
+    def __init__(self, base_price, free_way_time, price_coeff, spec_road_percentage, load_road_coeff):
         self.base_price = base_price
         self.price_coeff = price_coeff
         self.spec_road_percentage = spec_road_percentage
