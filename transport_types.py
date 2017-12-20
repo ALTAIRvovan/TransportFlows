@@ -30,7 +30,7 @@ class TrainTransport(BaseTransport):
         return self.free_way_time + self.user_road_time_sensity * road_users ** 4
 
     def _irritability(self, type_users, road_users):
-        return self.irritability * road_users ** 2
+        return self.irritability * road_users ** 4
 
     def cost(self, time_price, type_users, road_users):
         return (self.ticket_cost +
@@ -72,7 +72,7 @@ class CarTransport(BaseTransport):
         self.oil_per_time_coeff = oil_per_time_coeff
 
     def _travel_time(self, type_users, road_users):
-        return self.free_way_time * (1 + self.load_road_coeff * road_users ** 4)
+        return self.free_way_time + self.load_road_coeff * road_users ** 4
 
     def _oil_cost(self, type_users, road_users):
         return self.oil_per_time_coeff * self._travel_time(type_users, road_users)
