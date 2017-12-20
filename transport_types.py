@@ -30,7 +30,7 @@ class TrainTransport(BaseTransport):
         return self.free_way_time + self.user_road_time_sensity * road_users ** 4
 
     def _irritability(self, type_users, road_users):
-        return self.irritability * road_users ** 4
+        return self.irritability * road_users ** 2
 
     def cost(self, time_price, type_users, road_users):
         return (self.ticket_cost +
@@ -51,13 +51,13 @@ class TaxiTransport(BaseTransport):
         self.load_road_coeff = load_road_coeff
 
     def _travel_price(self, type_users, road_users):
-        return self.base_price + self.price_coeff * type_users ** 1/2
+        return self.base_price + self.price_coeff * type_users ** 0.5
 
     def _travel_time(self, type_users, road_users):
         return self.free_way_time + (1 - self.spec_road_percentage) * self.load_road_coeff * road_users ** 4
 
     def cost(self, time_price, type_users, road_users):
-        return self._travel_time(type_users, road_users) + time_price * self._travel_time(type_users, road_users)
+        return self._travel_price(type_users, road_users) + time_price * self._travel_time(type_users, road_users)
 
     def get_road_type(self):
         return ROAD_TYPES['road']
